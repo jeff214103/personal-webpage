@@ -474,6 +474,9 @@ section {
   border: 2px solid #1f977d;
 }
 
+.resume .card-body {
+  background: #eafaf7;
+}
 
 
 
