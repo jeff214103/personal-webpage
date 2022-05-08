@@ -518,6 +518,16 @@ section {
   font-weight: 600;
 }
 
+.activity .date {
+  font-size: 16px;
+  background: #e4edf9;
+  padding: 5px 15px;
+  display: inline-block;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-family: "Raleway", sans-serif;
+}
+
 
 /*--------------------------------------------------------------
 # Contact
