@@ -344,6 +344,7 @@ section {
   height: 40vh;
   min-height: 300px;
   object-fit: contain;
+  background-color: rgb(241, 241, 233);
 }
 
 
@@ -541,13 +542,16 @@ section {
   height: 40vh;
   min-height: 300px;
   object-fit: contain;
+  background-color: rgb(241, 241, 233);
 }
 
 /*--------------------------------------------------------------
 # Contact
 --------------------------------------------------------------*/
 .contact {
+  height: 100vh;
   padding-bottom: 130px;
+  min-height: 700px;
 }
 .contact .info {
   padding: 30px;
