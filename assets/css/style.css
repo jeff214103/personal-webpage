@@ -35,6 +35,18 @@ img {
   height: auto;
 }
 
+.btn-custom-green {
+  color: #fff;
+  background-color: #347a7b;
+  border-color: #347a7b;
+}
+
+.btn-custom-green:hover {
+  color: #fff;
+  background-color: #2e7071;
+  border-color: #2e7071;
+}
+
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
