@@ -4,7 +4,7 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
-(function() {
+(function () {
   "use strict";
   /**
    * Easy selector helper function
@@ -89,7 +89,7 @@
   /**
    * Mobile nav toggle
    */
-  on('click', '.mobile-nav-toggle', function(e) {
+  on('click', '.mobile-nav-toggle', function (e) {
     select('body').classList.toggle('mobile-nav-active')
     this.classList.toggle('bi-list')
     this.classList.toggle('bi-x')
@@ -98,7 +98,7 @@
   /**
    * Scrool with ofset on links with a class name .scrollto
    */
-  on('click', '.scrollto', function(e) {
+  on('click', '.scrollto', function (e) {
     if (select(this.hash)) {
       e.preventDefault()
 
@@ -148,7 +148,7 @@
     new Waypoint({
       element: skilsContent,
       offset: '80%',
-      handler: function(direction) {
+      handler: function (direction) {
         let progress = select('.progress .progress-bar', true);
         progress.forEach((el) => {
           el.style.width = el.getAttribute('aria-valuenow') + '%'
@@ -169,9 +169,9 @@
 
       let portfolioFilters = select('#portfolio-flters li', true);
 
-      on('click', '#portfolio-flters li', function(e) {
+      on('click', '#portfolio-flters li', function (e) {
         e.preventDefault();
-        portfolioFilters.forEach(function(el) {
+        portfolioFilters.forEach(function (el) {
           el.classList.remove('filter-active');
         });
         this.classList.add('filter-active');
@@ -179,7 +179,7 @@
         portfolioIsotope.arrange({
           filter: this.getAttribute('data-filter')
         });
-        portfolioIsotope.on('arrangeComplete', function() {
+        portfolioIsotope.on('arrangeComplete', function () {
           AOS.refresh()
         });
       }, true);
@@ -252,4 +252,100 @@
     })
   });
 
+  // Social Link Interaction
+  document.querySelectorAll('.social-links a').forEach(link => {
+    link.addEventListener('mouseenter', function () {
+      this.classList.add('hover');
+    });
+    link.addEventListener('mouseleave', function () {
+      this.classList.remove('hover');
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // Lazy Loading Images
+    var lazyImages = [].slice.call(document.querySelectorAll('img[data-src]'));
+
+    if ('IntersectionObserver' in window) {
+      let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            let lazyImage = entry.target;
+
+            // Set src from data-src
+            if (lazyImage.dataset.src) {
+              lazyImage.src = lazyImage.dataset.src;
+
+              // Remove data-src to prevent reloading
+              lazyImage.removeAttribute('data-src');
+            }
+
+            // Add loaded class for fade-in effect
+            lazyImage.classList.add('loaded');
+
+            // Stop observing this image
+            lazyImageObserver.unobserve(lazyImage);
+          }
+        });
+      }, {
+        rootMargin: "50px" // Start loading slightly before image enters viewport
+      });
+
+      // Observe each lazy image
+      lazyImages.forEach(function (lazyImage) {
+        // Ensure initial state
+        lazyImage.classList.remove('loaded');
+        lazyImageObserver.observe(lazyImage);
+      });
+    } else {
+      // Fallback for browsers without IntersectionObserver
+      let active = false;
+
+      const lazyLoad = function () {
+        if (active === false) {
+          active = true;
+
+          setTimeout(function () {
+            lazyImages.forEach(function (lazyImage) {
+              if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+                lazyImage.src = lazyImage.dataset.src;
+                lazyImage.classList.add('loaded');
+                lazyImage.removeAttribute('data-src');
+
+                lazyImages = lazyImages.filter(function (image) {
+                  return image !== lazyImage;
+                });
+
+                if (lazyImages.length === 0) {
+                  document.removeEventListener("scroll", lazyLoad);
+                  window.removeEventListener("resize", lazyLoad);
+                  window.removeEventListener("orientationchange", lazyLoad);
+                }
+              }
+            });
+
+            active = false;
+          }, 200);
+        }
+      };
+
+      document.addEventListener("scroll", lazyLoad);
+      window.addEventListener("resize", lazyLoad);
+      window.addEventListener("orientationchange", lazyLoad);
+    }
+
+    // Scroll-triggered animations
+    const scrollAnimations = document.querySelectorAll('.scroll-animate');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    scrollAnimations.forEach(element => {
+      observer.observe(element);
+    });
+  });
 })()
