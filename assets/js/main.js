@@ -349,3 +349,68 @@
     });
   });
 })()
+
+document.addEventListener('DOMContentLoaded', function() {
+  // URL for the Blogger RSS feed passed through the rss2json API
+  const blogRSS = 'https://blog.itdogtics.com/feeds/posts/default?alt=rss';
+  const apiURL = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(blogRSS);
+
+  fetch(apiURL)
+    .then(response => response.json())
+    .then(data => {
+      let output = '<h3 class="mb-3">Latest Blogs</h3>';
+      output += '<div class="row">';
+
+      const numPostsToShow = 3;
+      let posts = [];
+
+      if (data && data.items && data.items.length > 0) {
+        posts = data.items.slice(0, numPostsToShow);
+        // Loop through available posts and create a card for each
+        posts.forEach(item => {
+          // Use the thumbnail if available; otherwise, use a placeholder image.
+          let imageUrl = item.thumbnail ? item.thumbnail : 'assets/img/blogger_preview.jpg';
+          
+          output += `
+            <div class="col-md-4 mb-4">
+              <div class="card h-100">
+                <a href="${item.link}" target="_blank">
+                  <img src="${imageUrl}" class="card-img-top" alt="${item.title}">
+                </a>
+                <div class="card-body">
+                  <h5 class="card-title">${item.title}</h5>
+                  <p class="card-text">${item.description ? item.description.replace(/<[^>]+>/g, '').substring(0, 100) + '...' : ''}</p>
+                </div>
+                <div class="card-footer text-center">
+                  <a href="${item.link}" target="_blank" class="btn btn-custom-green">Read More</a>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      // If there are fewer than 3 posts, add Coming Soon cards for the remaining columns
+      const displayedCount = posts.length;
+      for (let i = displayedCount; i < numPostsToShow; i++) {
+        output += `
+          <div class="col-md-4 mb-4">
+            <div class="card h-100">
+              <img src="assets/img/blogger_preview.jpg" class="card-img-top" alt="Coming Soon">
+              <div class="card-body">
+                <h5 class="card-title">Coming Soon</h5>
+                <p class="card-text">More posts are on the way. Stay tuned!</p>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      output += '</div>';
+      document.getElementById('blog-previews').innerHTML = output;
+    })
+    .catch(error => {
+      console.error('Error fetching RSS feed:', error);
+      document.getElementById('blog-previews').innerHTML = '<p>Error loading feed.</p>';
+    });
+});
