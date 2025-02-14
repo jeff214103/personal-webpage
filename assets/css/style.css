@@ -9,11 +9,17 @@
 # General
 --------------------------------------------------------------*/
 :root {
-  --primary-color: #2c3e50;      /* Deep blue-gray for main elements */
-  --secondary-color: #34495e;    /* Slightly lighter blue-gray */
-  --accent-color: #27ae60;       /* Soft green for highlights */
-  --text-color: #333;            /* Dark gray for readability */
-  --background-color: #f4f6f7;   /* Light gray background */
+  /* Unified element color variables for a consistent color theme */
+  --element-color: #1f977d;
+  /* Dedicated element color for interactive elements */
+  --element-color-dark: #066d50;
+  /* Darker variant for hover and active states */
+  --accent-color: #27ae60;
+  /* Soft green for highlights */
+  --text-color: #333;
+  /* Dark gray for readability */
+  --background-color: #f4f6f7;
+  /* Light gray background */
 }
 
 body {
@@ -29,35 +35,43 @@ a {
   transition: color 0.3s ease;
 }
 
-a:hover, a:focus {
-  color: var(--secondary-color);
+a:hover,
+a:focus {
+  color: var(--element-color-dark);
   text-decoration: underline;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Poppins', sans-serif;
-  color: var(--primary-color);
+  /* Use a neutral text color for headings */
+  color: var(--text-color);
   margin-bottom: 0.8rem;
 }
 
 img {
   display: block;
-  max-width: 100%; 
+  max-width: 100%;
   max-height: 100%;
   width: auto;
   height: auto;
 }
 
+/* Custom Button with unified element color */
 .btn-custom-green {
   color: #fff;
-  background-color: #1f977d;
-  border-color: #1f977d;
+  background-color: var(--element-color);
+  border-color: var(--element-color);
 }
 
 .btn-custom-green:hover {
   color: #fff;
-  background-color: #02352a;
-  border-color: #02352a;
+  background-color: var(--element-color-dark);
+  border-color: var(--element-color-dark);
 }
 
 /*--------------------------------------------------------------
@@ -70,21 +84,24 @@ img {
   right: 15px;
   bottom: 15px;
   z-index: 996;
-  background: #0bbd87;
+  background: var(--element-color);
   width: 40px;
   height: 40px;
   border-radius: 50px;
   transition: all 0.4s;
 }
+
 .back-to-top i {
   font-size: 28px;
   color: #fff;
   line-height: 0;
 }
+
 .back-to-top:hover {
-  background: #2eafec;
+  background: var(--element-color-dark);
   color: #fff;
 }
+
 .back-to-top.active {
   visibility: visible;
   opacity: 1;
@@ -101,30 +118,34 @@ img {
   width: 300px;
   transition: all ease-in-out 0.5s;
   z-index: 9997;
-  transition: all 0.5s;
   padding: 0 15px;
   background: #0a1311;
+  /* Keeping dark header for contrast */
   overflow-y: auto;
 }
+
 #header .profile img {
   margin: 15px auto;
   display: block;
   width: 120px;
   border: 8px solid #2c2f3f;
 }
+
 #header .profile h1 {
   font-size: 24px;
   margin: 0;
   padding: 0;
   font-weight: 600;
-  -moz-text-align-last: center;
-  text-align-last: center;
+  text-align: center;
   font-family: "Poppins", sans-serif;
 }
-#header .profile h1 a, #header .profile h1 a:hover {
+
+#header .profile h1 a,
+#header .profile h1 a:hover {
   color: #fff;
   text-decoration: none;
 }
+
 #header .profile .social-links a {
   font-size: 18px;
   display: inline-block;
@@ -139,8 +160,9 @@ img {
   height: 36px;
   transition: 0.3s;
 }
+
 #header .profile .social-links a:hover {
-  background: #0bbd87;
+  background: var(--accent-color);
   color: #fff;
   text-decoration: none;
 }
@@ -153,7 +175,7 @@ img {
   #header {
     left: -300px;
   }
-  
+
   #main {
     margin-left: 0;
   }
@@ -166,16 +188,20 @@ img {
 .nav-menu {
   padding: 30px 0 0 0;
 }
+
 .nav-menu * {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-.nav-menu > ul > li {
+
+.nav-menu>ul>li {
   position: relative;
   white-space: nowrap;
 }
-.nav-menu a, .nav-menu a:focus {
+
+.nav-menu a,
+.nav-menu a:focus {
   display: flex;
   align-items: center;
   color: #a8a9b4;
@@ -184,17 +210,27 @@ img {
   transition: 0.3s;
   font-size: 15px;
 }
-.nav-menu a i, .nav-menu a:focus i {
+
+.nav-menu a i,
+.nav-menu a:focus i {
   font-size: 24px;
   padding-right: 8px;
   color: #6f7180;
 }
-.nav-menu a:hover, .nav-menu .active, .nav-menu .active:focus, .nav-menu li:hover > a {
+
+.nav-menu a:hover,
+.nav-menu .active,
+.nav-menu .active:focus,
+.nav-menu li:hover>a {
   text-decoration: none;
   color: #fff;
 }
-.nav-menu a:hover i, .nav-menu .active i, .nav-menu .active:focus i, .nav-menu li:hover > a i {
-  color: #0bbd87;
+
+.nav-menu a:hover i,
+.nav-menu .active i,
+.nav-menu .active:focus i,
+.nav-menu li:hover>a i {
+  color: var(--element-color);
 }
 
 /* Mobile Navigation */
@@ -207,7 +243,7 @@ img {
   font-size: 24px;
   transition: all 0.4s;
   outline: none !important;
-  background-color: #0bbd87;
+  background-color: var(--element-color);
   color: #fff;
   width: 40px;
   height: 40px;
@@ -222,6 +258,7 @@ img {
 .mobile-nav-active {
   overflow: hidden;
 }
+
 .mobile-nav-active #header {
   left: 0;
 }
@@ -235,6 +272,7 @@ img {
   background: url("../img/hero-bg.jpg") top center;
   background-size: cover;
 }
+
 #hero:before {
   content: "";
   background: rgba(5, 13, 24, 0.3);
@@ -245,11 +283,13 @@ img {
   right: 0;
   z-index: 1;
 }
+
 #hero .hero-container {
   position: relative;
   z-index: 2;
   min-width: 300px;
 }
+
 #hero h1 {
   margin: 0 0 10px 0;
   font-size: 64px;
@@ -257,28 +297,33 @@ img {
   line-height: 56px;
   color: #fff;
 }
+
 #hero p {
   color: #fff;
   margin-bottom: 50px;
   font-size: 26px;
   font-family: "Poppins", sans-serif;
 }
+
 #hero p span {
   color: #fff;
   padding-bottom: 4px;
   letter-spacing: 1px;
   border-bottom: 3px solid #0bbd87;
 }
+
 @media (min-width: 1024px) {
   #hero {
     background-attachment: fixed;
   }
 }
+
 @media (max-width: 768px) {
   #hero h1 {
     font-size: 28px;
     line-height: 36px;
   }
+
   #hero h2 {
     font-size: 18px;
     line-height: 24px;
@@ -323,32 +368,38 @@ section {
   left: 50%;
   transform: translateX(-50%);
 }
+
 /*--------------------------------------------------------------
 # About
 --------------------------------------------------------------*/
 .about .content h3 {
   font-weight: 700;
   font-size: 26px;
-  color: #02352a;
+  color: var(--element-color-dark);
 }
+
 .about .content ul {
   list-style: none;
   padding: 0;
 }
+
 .about .content ul li {
   margin-bottom: 20px;
   display: flex;
   align-items: center;
 }
+
 .about .content ul strong {
   margin-right: 10px;
 }
+
 .about .content ul i {
   font-size: 16px;
   margin-right: 5px;
-  color: #0bbd87;
+  color: var(--element-color);
   line-height: 0;
 }
+
 .about .content p:last-child {
   margin-bottom: 0;
 }
@@ -359,7 +410,7 @@ section {
 .award .content h3 {
   font-weight: 700;
   font-size: 26px;
-  color: #02352a;
+  color: var(--element-color-dark);
 }
 
 /*--------------------------------------------------------------
@@ -390,17 +441,20 @@ section {
 .facts {
   padding-bottom: 30px;
 }
+
 .facts .count-box {
   padding: 30px;
   width: 100%;
 }
+
 .facts .count-box i {
   display: block;
   font-size: 44px;
-  color: #0bbd87;
+  color: var(--element-color);
   float: left;
   line-height: 0;
 }
+
 .facts .count-box span {
   font-size: 48px;
   line-height: 40px;
@@ -409,6 +463,7 @@ section {
   color: #050d18;
   margin-left: 60px;
 }
+
 .facts .count-box p {
   padding: 15px 0 0 0;
   margin: 0 0 0 60px;
@@ -416,6 +471,7 @@ section {
   font-size: 14px;
   color: #122f57;
 }
+
 .facts .count-box a {
   font-weight: 600;
   display: block;
@@ -425,6 +481,7 @@ section {
   font-family: "Poppins", sans-serif;
   transition: ease-in-out 0.3s;
 }
+
 .facts .count-box a:hover {
   color: #1f5297;
 }
@@ -438,6 +495,7 @@ section {
   background: none;
   border-radius: 0;
 }
+
 .skills .progress .skill {
   padding: 0;
   margin: 0 0 6px 0;
@@ -447,19 +505,22 @@ section {
   font-family: "Poppins", sans-serif;
   color: #050d18;
 }
+
 .skills .progress .skill .val {
   float: right;
   font-style: normal;
 }
+
 .skills .progress-bar-wrap {
   background: #dce8f8;
   height: 10px;
 }
+
 .skills .progress-bar {
   width: 1px;
   height: 10px;
   transition: 0.9s;
-  background-color: #0bbd87;
+  background-color: var(--element-color);
 }
 
 .skills .icon-box {
@@ -473,10 +534,10 @@ section {
   justify-content: center;
   width: 54px;
   height: 54px;
-  background: #0bbd87;
+  background: var(--element-color);
   border-radius: 50%;
   transition: 0.5s;
-  border: 1px solid #0bbd87;
+  border: 1px solid var(--element-color);
 }
 
 .skills .icon i {
@@ -490,7 +551,7 @@ section {
 }
 
 .skills .icon-box:hover .icon i {
-  color: #0bbd87;
+  color: var(--element-color);
 }
 
 .skills .title {
@@ -505,7 +566,7 @@ section {
 }
 
 .skills .title a:hover {
-  color: #0bbd87;
+  color: var(--element-color);
 }
 
 .skills .description {
@@ -515,7 +576,7 @@ section {
 }
 
 .skills b {
-  color: #02352a;
+  color: var(--element-color-dark);
 }
 
 /*--------------------------------------------------------------
@@ -528,12 +589,14 @@ section {
   margin-bottom: 20px;
   color: #050d18;
 }
+
 .resume .resume-item {
   padding: 0 0 20px 20px;
   margin-top: -2px;
-  border-left: 2px solid #1f977d;
+  border-left: 2px solid var(--element-color);
   position: relative;
 }
+
 .resume .resume-item h4 {
   line-height: 18px;
   font-size: 18px;
@@ -543,6 +606,7 @@ section {
   color: #050d18;
   margin-bottom: 10px;
 }
+
 .resume .resume-item h5 {
   font-size: 16px;
   background: #e4edf9;
@@ -551,15 +615,19 @@ section {
   font-weight: 600;
   margin-bottom: 10px;
 }
+
 .resume .resume-item ul {
   padding-left: 20px;
 }
+
 .resume .resume-item ul li {
   padding-bottom: 10px;
 }
+
 .resume .resume-item:last-child {
   padding-bottom: 0;
 }
+
 .resume .resume-item::before {
   content: "";
   position: absolute;
@@ -569,7 +637,7 @@ section {
   left: -9px;
   top: 0;
   background: #fff;
-  border: 2px solid #1f977d;
+  border: 2px solid var(--element-color);
 }
 
 .resume .card-body {
@@ -583,9 +651,10 @@ section {
   list-style-type: none;
   position: relative;
 }
+
 .activity ul.timeline:before {
   content: ' ';
-  background: #1f977d;
+  background: var(--element-color);
   display: inline-block;
   position: absolute;
   left: 29px;
@@ -593,18 +662,19 @@ section {
   height: 100%;
   z-index: 400;
 }
-.activity ul.timeline > li {
+
+.activity ul.timeline>li {
   margin: 20px 0;
   padding-left: 20px;
 }
 
-.activity ul.timeline > li:before {
+.activity ul.timeline>li:before {
   content: ' ';
   background: white;
   display: inline-block;
   position: absolute;
   border-radius: 50%;
-  border: 2px solid #1f977d;
+  border: 2px solid var(--element-color);
   left: 20px;
   width: 20px;
   height: 20px;
@@ -612,7 +682,7 @@ section {
 }
 
 .activity b {
-  color: #02352a;
+  color: var(--element-color-dark);
   font-weight: 600;
 }
 
@@ -651,7 +721,7 @@ section {
 
 .itdogtics-services li:hover {
   transform: translateX(10px);
-  color: #27ae60; /* Adjust this green as needed */
+  color: var(--element-color);
 }
 
 .itdogtics-services li i {
@@ -661,7 +731,7 @@ section {
 
 .itdogtics-services li:hover i {
   transform: scale(1.2);
-  color: #27ae60;
+  color: var(--element-color);
 }
 
 /*--------------------------------------------------------------
@@ -672,25 +742,28 @@ section {
   padding-bottom: 130px;
   min-height: 700px;
 }
+
 .contact .info {
   padding: 30px;
   background: #fff;
   width: 100%;
   box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.12);
 }
+
 .contact .info i {
   font-size: 20px;
-  color: #0bbd87;
+  color: var(--element-color);
   float: left;
   width: 44px;
   height: 44px;
-  background: #dff3fc;
+  background: rgba(11, 189, 135, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50px;
   transition: all 0.3s ease-in-out;
 }
+
 .contact .info h4 {
   padding: 0 0 0 60px;
   font-size: 22px;
@@ -698,22 +771,26 @@ section {
   margin-bottom: 5px;
   color: #050d18;
 }
+
 .contact .info p {
   padding: 0 0 10px 60px;
   margin-bottom: 20px;
   font-size: 14px;
   color: #02352a;
 }
+
 .contact .info .email p {
   padding-top: 5px;
 }
+
 .contact .info .social-links {
   padding-left: 60px;
 }
+
 .contact .info .social-links a {
   font-size: 18px;
   display: inline-block;
-  background: #333;
+  background: var(--element-color);
   color: #fff;
   line-height: 1;
   padding: 8px 0;
@@ -724,23 +801,30 @@ section {
   transition: 0.3s;
   margin-right: 10px;
 }
+
 .contact .info .social-links a:hover {
-  background: #0bbd87;
+  background: var(--element-color-dark);
   color: #fff;
 }
-.contact .info .email:hover i, .contact .info .address:hover i, .contact .info .phone:hover i {
-  background: #0bbd87;
+
+.contact .info .email:hover i,
+.contact .info .address:hover i,
+.contact .info .phone:hover i {
+  background: var(--element-color-dark);
   color: #fff;
 }
+
 .contact .php-email-form {
   width: 100%;
   padding: 30px;
   background: #fff;
   box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.12);
 }
+
 .contact .php-email-form .form-group {
   padding-bottom: 8px;
 }
+
 .contact .php-email-form .validate {
   display: none;
   color: red;
@@ -748,6 +832,7 @@ section {
   font-weight: 400;
   font-size: 13px;
 }
+
 .contact .php-email-form .error-message {
   display: none;
   color: #fff;
@@ -756,9 +841,11 @@ section {
   padding: 15px;
   font-weight: 600;
 }
-.contact .php-email-form .error-message br + br {
+
+.contact .php-email-form .error-message br+br {
   margin-top: 25px;
 }
+
 .contact .php-email-form .sent-message {
   display: none;
   color: #fff;
@@ -767,12 +854,14 @@ section {
   padding: 15px;
   font-weight: 600;
 }
+
 .contact .php-email-form .loading {
   display: none;
   background: #fff;
   text-align: center;
   padding: 15px;
 }
+
 .contact .php-email-form .loading:before {
   content: "";
   display: inline-block;
@@ -785,46 +874,58 @@ section {
   -webkit-animation: animate-loading 1s linear infinite;
   animation: animate-loading 1s linear infinite;
 }
+
 .contact .php-email-form .form-group {
   margin-bottom: 15px;
 }
+
 .contact .php-email-form label {
   padding-bottom: 8px;
 }
-.contact .php-email-form input, .contact .php-email-form textarea {
+
+.contact .php-email-form input,
+.contact .php-email-form textarea {
   border-radius: 0;
   box-shadow: none;
   font-size: 14px;
 }
+
 .contact .php-email-form input {
   height: 44px;
 }
+
 .contact .php-email-form textarea {
   padding: 10px 15px;
 }
+
 .contact .php-email-form button[type=submit] {
-  background: #0bbd87;
+  background: var(--element-color);
   border: 0;
   padding: 10px 24px;
   color: #fff;
   transition: 0.4s;
   border-radius: 4px;
 }
+
 .contact .php-email-form button[type=submit]:hover {
-  background: #37b3ed;
+  background: var(--element-color-dark);
 }
+
 @-webkit-keyframes animate-loading {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
+
 @keyframes animate-loading {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -844,15 +945,18 @@ section {
   z-index: 9999;
   background: #0a1311;
 }
+
 #footer .copyright {
   text-align: center;
 }
+
 #footer .credits {
   padding-top: 5px;
   text-align: center;
   font-size: 13px;
   color: #eaebf0;
 }
+
 @media (max-width: 1199px) {
   #footer {
     position: static;
@@ -868,7 +972,7 @@ section {
   body {
     font-size: 16px;
   }
-  
+
   .section-title h2 {
     font-size: 1.5rem;
   }
@@ -888,14 +992,14 @@ section {
 }
 
 .btn-primary {
-  background-color: var(--accent-color);
-  border-color: var(--accent-color);
+  background-color: var(--element-color);
+  border-color: var(--element-color);
   color: white;
 }
 
 .btn-primary:hover {
-  background-color: var(--secondary-color);
-  border-color: var(--secondary-color);
+  background-color: var(--element-color-dark);
+  border-color: var(--element-color-dark);
 }
 
 /*--------------------------------------------------------------
@@ -923,11 +1027,10 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, 
-    rgba(255, 255, 255, 0.1) 0%, 
-    rgba(255, 255, 255, 0.3) 50%, 
-    rgba(255, 255, 255, 0.1) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0.1) 100%);
   transform: translateX(-100%);
   animation: loading-shimmer 1.5s infinite;
 }
@@ -960,12 +1063,10 @@ section {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    120deg, 
-    transparent, 
-    rgba(255, 255, 255, 0.3), 
-    transparent
-  );
+  background: linear-gradient(120deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent);
   transition: all 0.6s;
 }
 
@@ -977,7 +1078,9 @@ section {
 # Skill Progress Bar Animation
 --------------------------------------------------------------*/
 @keyframes skill-progress {
-  0% { width: 0; }
+  0% {
+    width: 0;
+  }
 }
 
 .skill-progress {
@@ -1036,14 +1139,14 @@ section {
 .tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted var(--secondary-color);
+  border-bottom: 1px dotted var(--element-color);
   cursor: help;
 }
 
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 200px;
-  background-color: var(--secondary-color);
+  background-color: var(--element-color-dark);
   color: #fff;
   text-align: center;
   border-radius: 6px;
