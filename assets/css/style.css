@@ -638,6 +638,33 @@ section {
 }
 
 /*--------------------------------------------------------------
+# ITDogtics
+--------------------------------------------------------------*/
+/* Enhanced interactivity for ITDogtics bullet points */
+.itdogtics-services li {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  transition: transform 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.itdogtics-services li:hover {
+  transform: translateX(10px);
+  color: #27ae60; /* Adjust this green as needed */
+}
+
+.itdogtics-services li i {
+  margin-right: 10px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.itdogtics-services li:hover i {
+  transform: scale(1.2);
+  color: #27ae60;
+}
+
+/*--------------------------------------------------------------
 # Contact
 --------------------------------------------------------------*/
 .contact {
