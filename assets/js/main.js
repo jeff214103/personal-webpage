@@ -368,8 +368,21 @@ document.addEventListener('DOMContentLoaded', function() {
         posts = data.items.slice(0, numPostsToShow);
         // Loop through available posts and create a card for each
         posts.forEach(item => {
-          // Use the thumbnail if available; otherwise, use a placeholder image.
-          let imageUrl = item.thumbnail ? item.thumbnail : 'assets/img/blogger_preview.jpg';
+          // Instead of fetching the thumbnail, extract the first image from the content.
+          let imageUrl;
+          if (item.content) {
+            // Create a temporary element to parse the HTML content.
+            let tempDiv = document.createElement('div');
+            tempDiv.innerHTML = item.content;
+            let imgTag = tempDiv.querySelector('img');
+            if (imgTag && imgTag.src) {
+              imageUrl = imgTag.src;
+            } else {
+              imageUrl = 'assets/img/blogger_preview.jpg';
+            }
+          } else {
+            imageUrl = 'assets/img/blogger_preview.jpg';
+          }
           
           output += `
             <div class="col-md-4 mb-4">
