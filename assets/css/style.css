@@ -734,6 +734,14 @@ section {
   color: var(--element-color);
 }
 
+.itdogtics .card-img-top {
+  width: 100%;
+  height: 40vh;
+  min-height: 300px;
+  object-fit: contain;
+  background-color: rgb(241, 241, 233);
+}
+
 /*--------------------------------------------------------------
 # Contact
 --------------------------------------------------------------*/
