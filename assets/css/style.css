@@ -1172,3 +1172,37 @@ section {
   visibility: visible;
   opacity: 1;
 }
+
+/*--------------------------------------------------------------
+# Resume Collapse Animation
+--------------------------------------------------------------*/
+.resume-item .btn-link {
+  color: var(--element-color);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.resume-item .btn-link:hover {
+  color: var(--element-color-dark);
+  text-decoration: none;
+}
+
+.resume-item .btn-link i {
+  transition: transform 0.3s ease;
+  margin-right: 5px;
+}
+
+.resume-item .btn-link[aria-expanded="true"] i {
+  transform: rotate(180deg);
+}
+
+.resume-item .collapse ul {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.resume-item .collapse li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
