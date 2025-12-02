@@ -3,9 +3,11 @@
 * Template URL: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
+* Modified by: Jeff Lam (Refactored to Pure HTML/CSS)
 */
 (function () {
   "use strict";
+
   /**
    * Easy selector helper function
    */
@@ -91,8 +93,8 @@
    */
   on('click', '.mobile-nav-toggle', function (e) {
     select('body').classList.toggle('mobile-nav-active')
-    this.classList.toggle('bi-list')
-    this.classList.toggle('bi-x')
+    this.querySelector('i').classList.toggle('bi-list')
+    this.querySelector('i').classList.toggle('bi-x')
   })
 
   /**
@@ -106,8 +108,8 @@
       if (body.classList.contains('mobile-nav-active')) {
         body.classList.remove('mobile-nav-active')
         let navbarToggle = select('.mobile-nav-toggle')
-        navbarToggle.classList.toggle('bi-list')
-        navbarToggle.classList.toggle('bi-x')
+        navbarToggle.querySelector('i').classList.toggle('bi-list')
+        navbarToggle.querySelector('i').classList.toggle('bi-x')
       }
       scrollto(this.hash)
     }
@@ -141,103 +143,10 @@
   }
 
   /**
-   * Skills animation
-   */
-  let skilsContent = select('.skills-content');
-  if (skilsContent) {
-    new Waypoint({
-      element: skilsContent,
-      offset: '80%',
-      handler: function (direction) {
-        let progress = select('.progress .progress-bar', true);
-        progress.forEach((el) => {
-          el.style.width = el.getAttribute('aria-valuenow') + '%'
-        });
-      }
-    })
-  }
-
-  /**
-   * Porfolio isotope and filter
-   */
-  window.addEventListener('load', () => {
-    let portfolioContainer = select('.portfolio-container');
-    if (portfolioContainer) {
-      let portfolioIsotope = new Isotope(portfolioContainer, {
-        itemSelector: '.portfolio-item'
-      });
-
-      let portfolioFilters = select('#portfolio-flters li', true);
-
-      on('click', '#portfolio-flters li', function (e) {
-        e.preventDefault();
-        portfolioFilters.forEach(function (el) {
-          el.classList.remove('filter-active');
-        });
-        this.classList.add('filter-active');
-
-        portfolioIsotope.arrange({
-          filter: this.getAttribute('data-filter')
-        });
-        portfolioIsotope.on('arrangeComplete', function () {
-          AOS.refresh()
-        });
-      }, true);
-    }
-
-  });
-
-  /**
    * Initiate portfolio lightbox 
    */
   const portfolioLightbox = GLightbox({
     selector: '.portfolio-lightbox'
-  });
-
-  /**
-   * Portfolio details slider
-   */
-  new Swiper('.portfolio-details-slider', {
-    speed: 400,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    }
-  });
-
-  /**
-   * Testimonials slider
-   */
-  new Swiper('.testimonials-slider', {
-    speed: 600,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false
-    },
-    slidesPerView: 'auto',
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    },
-    breakpoints: {
-      320: {
-        slidesPerView: 1,
-        spaceBetween: 20
-      },
-
-      1200: {
-        slidesPerView: 3,
-        spaceBetween: 20
-      }
-    }
   });
 
   /**
@@ -262,103 +171,41 @@
     });
   });
 
-  document.addEventListener('DOMContentLoaded', function () {
-    // Lazy Loading Images
-    var lazyImages = [].slice.call(document.querySelectorAll('img[data-src]'));
-
-    if ('IntersectionObserver' in window) {
-      let lazyImageObserver = new IntersectionObserver(function (entries, observer) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            let lazyImage = entry.target;
-
-            // Set src from data-src
-            if (lazyImage.dataset.src) {
-              lazyImage.src = lazyImage.dataset.src;
-
-              // Remove data-src to prevent reloading
-              lazyImage.removeAttribute('data-src');
-            }
-
-            // Add loaded class for fade-in effect
-            lazyImage.classList.add('loaded');
-
-            // Stop observing this image
-            lazyImageObserver.unobserve(lazyImage);
-          }
-        });
-      }, {
-        rootMargin: "50px" // Start loading slightly before image enters viewport
+  // Show More Projects
+  const loadMoreBtn = document.getElementById('load-more-projects');
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener('click', function () {
+      const hiddenProjects = document.querySelectorAll('.more-project-item');
+      hiddenProjects.forEach((project, index) => {
+        project.classList.remove('d-none');
+        // Add funny animation class
+        project.classList.add('funny-animate');
+        // Stagger the animation
+        project.style.animationDelay = (index * 0.15) + 's';
       });
-
-      // Observe each lazy image
-      lazyImages.forEach(function (lazyImage) {
-        // Ensure initial state
-        lazyImage.classList.remove('loaded');
-        lazyImageObserver.observe(lazyImage);
-      });
-    } else {
-      // Fallback for browsers without IntersectionObserver
-      let active = false;
-
-      const lazyLoad = function () {
-        if (active === false) {
-          active = true;
-
-          setTimeout(function () {
-            lazyImages.forEach(function (lazyImage) {
-              if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
-                lazyImage.src = lazyImage.dataset.src;
-                lazyImage.classList.add('loaded');
-                lazyImage.removeAttribute('data-src');
-
-                lazyImages = lazyImages.filter(function (image) {
-                  return image !== lazyImage;
-                });
-
-                if (lazyImages.length === 0) {
-                  document.removeEventListener("scroll", lazyLoad);
-                  window.removeEventListener("resize", lazyLoad);
-                  window.removeEventListener("orientationchange", lazyLoad);
-                }
-              }
-            });
-
-            active = false;
-          }, 200);
-        }
-      };
-
-      document.addEventListener("scroll", lazyLoad);
-      window.addEventListener("resize", lazyLoad);
-      window.addEventListener("orientationchange", lazyLoad);
-    }
-
-    // Scroll-triggered animations
-    const scrollAnimations = document.querySelectorAll('.scroll-animate');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    scrollAnimations.forEach(element => {
-      observer.observe(element);
+      this.style.display = 'none';
+      if (typeof AOS !== 'undefined') {
+        setTimeout(() => {
+          AOS.refresh();
+        }, 100);
+      }
     });
-  });
+  }
+
 })()
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // URL for the Blogger RSS feed passed through the rss2json API
   const blogRSS = 'https://blog.itdogtics.com/feeds/posts/default?alt=rss';
   const apiURL = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(blogRSS);
 
+  const blogPreviews = document.getElementById('blog-previews');
+  if (!blogPreviews) return;
+
   fetch(apiURL)
     .then(response => response.json())
     .then(data => {
-      let output = '<h3 class="mb-3">Latest Blogs</h3>';
+      let output = '<h3 class="mb-3 text-center">Latest Blogs</h3>';
       output += '<div class="row">';
 
       const numPostsToShow = 3;
@@ -383,10 +230,10 @@ document.addEventListener('DOMContentLoaded', function() {
           } else {
             imageUrl = 'assets/img/blogger_preview.jpg';
           }
-          
+
           output += `
-            <div class="col-md-4 mb-4">
-              <div class="card h-100">
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="${100 * (posts.indexOf(item) + 1)}">
+              <div class="blog-card">
                 <a href="${item.link}" target="_blank">
                   <img src="${imageUrl}" class="card-img-top" alt="${item.title}">
                 </a>
@@ -394,8 +241,8 @@ document.addEventListener('DOMContentLoaded', function() {
                   <h5 class="card-title">${item.title}</h5>
                   <p class="card-text">${item.description ? item.description.replace(/<[^>]+>/g, '').substring(0, 100) + '...' : ''}</p>
                 </div>
-                <div class="card-footer text-center">
-                  <a href="${item.link}" target="_blank" class="btn btn-custom-green">Read More</a>
+                <div class="card-footer">
+                  <a href="${item.link}" target="_blank" class="btn btn-primary">Read More</a>
                 </div>
               </div>
             </div>
@@ -407,8 +254,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const displayedCount = posts.length;
       for (let i = displayedCount; i < numPostsToShow; i++) {
         output += `
-          <div class="col-md-4 mb-4">
-            <div class="card h-100">
+          <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="${100 * (i + 1)}">
+            <div class="blog-card">
               <img src="assets/img/blogger_preview.jpg" class="card-img-top" alt="Coming Soon">
               <div class="card-body">
                 <h5 class="card-title">Coming Soon</h5>
@@ -420,10 +267,45 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       output += '</div>';
-      document.getElementById('blog-previews').innerHTML = output;
+      blogPreviews.innerHTML = output;
     })
     .catch(error => {
       console.error('Error fetching RSS feed:', error);
-      document.getElementById('blog-previews').innerHTML = '<p>Error loading feed.</p>';
+      blogPreviews.innerHTML = '<p class="text-center">Error loading feed.</p>';
+
     });
+});
+
+/**
+ * Theme Toggle Logic
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  const icon = themeToggleBtn.querySelector('i');
+  const html = document.documentElement;
+
+  // Check for saved theme preference or system preference
+  const savedTheme = localStorage.getItem('theme');
+  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+    html.setAttribute('data-theme', 'dark');
+    icon.classList.remove('bi-moon');
+    icon.classList.add('bi-sun');
+  }
+
+  themeToggleBtn.addEventListener('click', () => {
+    const currentTheme = html.getAttribute('data-theme');
+    if (currentTheme === 'dark') {
+      html.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
+      icon.classList.remove('bi-sun');
+      icon.classList.add('bi-moon');
+    } else {
+      html.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+      icon.classList.remove('bi-moon');
+      icon.classList.add('bi-sun');
+    }
+  });
 });
