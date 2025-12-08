@@ -158,7 +158,8 @@
             <div class="container">
                 <div class="section-title" data-aos="fade-up">
                     <h2>Background</h2>
-                    <p>You can download my resume <a href="#">here</a>.</p>
+                    <p>You can "download" my resume <a id="resume-generator-link" target="_blank">here</a> via my
+                        ITDogtics Resume Generator app.</p>
                 </div>
 
                 <div class="row">
@@ -279,7 +280,32 @@
                             <h5>Jun 2025 - Present</h5>
                             <p><em><a href="https://rivian.com/en-GB" target="_blank">Rivian and VW Group
                                         Technology</a>, Vancouver, Canada</em></p>
-                            <p><strong>Skills:</strong> Python · Rust · CI/CD · AWS</p>
+                            <details>
+                                <summary>View Responsibilities</summary>
+                                <ul>
+                                    <li>Designed and deployed distributed systems and applications, focusing on
+                                        scalability, reliability, and performance.</li>
+                                    <li>Worked with event-driven architectures, leveraging Kafka and Redis.</li>
+                                    <li>Built efficient and fault-tolerant systems.</li>
+                                    <li>Collaborated with cross-functional teams to translate system requirements into
+                                        scalable technical solutions.</li>
+                                    <li>Wrote high-quality, maintainable Go (GoLang) code with robust test coverage.
+                                    </li>
+                                    <li>Implemented, monitored, and debugged applications to ensure high availability
+                                        and low latency.</li>
+                                    <li>Developed, deployed, and maintained solutions on AWS.</li>
+                                    <li>Managed and optimized message brokers.</li>
+                                    <li>Implemented streaming and queuing solutions.</li>
+                                    <li>Proactively identified and addressed performance bottlenecks, scalability
+                                        challenges, and production issues.</li>
+                                    <li>Participated in an on-call rotation, addressing production issues during
+                                        off-hours, weekends, and holidays.</li>
+                                    <li>Maintained comprehensive documentation for systems, processes, and tools.</li>
+                                    <li>Continuously improved CI/CD pipelines, monitoring, and alerting systems.</li>
+                                    <li>Ensured system reliability and uptime through on-call participation.</li>
+                                </ul>
+                                <p><strong>Skills:</strong> Python · Rust · CI/CD · AWS</p>
+                            </details>
                         </div>
 
                         <div class="resume-item">
@@ -1196,10 +1222,14 @@
     <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="assets/vendor/typed.js/typed.min.js"></script>
     <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="assets/vendor/pako/pako.min.js"></script>
 
     <!-- Main JS File -->
     <script src="assets/js/main.js"></script>
-
+    <script src="assets/js/resume_generator.js"></script>
+    <script>
+        ResumeGenerator.setupButton('resume-generator-link', 'Jeff Lam');
+    </script>
 </body>
 
 </html>
