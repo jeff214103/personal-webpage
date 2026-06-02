@@ -45,18 +45,36 @@
    * Navbar links active state on scroll
    */
   let navbarlinks = select('#navbar .scrollto', true)
+  const documentTop = (element) => element.getBoundingClientRect().top + window.scrollY
+
   const navbarlinksActive = () => {
-    let position = window.scrollY + 200
+    const homeLink = navbarlinks.find(navbarlink => navbarlink.hash === '#hero')
+    if (window.scrollY <= 24 && homeLink) {
+      navbarlinks.forEach(navbarlink => navbarlink.classList.remove('active'))
+      homeLink.classList.add('active')
+      return
+    }
+
+    const position = window.scrollY + Math.min(160, window.innerHeight * 0.28)
+    let activeLink = null
+
     navbarlinks.forEach(navbarlink => {
       if (!navbarlink.hash) return
       let section = select(navbarlink.hash)
       if (!section) return
-      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
-        navbarlink.classList.add('active')
-      } else {
-        navbarlink.classList.remove('active')
+
+      const sectionTop = documentTop(section)
+      if (position >= sectionTop) {
+        activeLink = navbarlink
       }
     })
+
+    navbarlinks.forEach(navbarlink => navbarlink.classList.remove('active'))
+    if (activeLink) {
+      activeLink.classList.add('active')
+    } else if (navbarlinks.length) {
+      navbarlinks[0].classList.add('active')
+    }
   }
   window.addEventListener('load', navbarlinksActive)
   onscroll(document, navbarlinksActive)
@@ -65,7 +83,7 @@
    * Scrolls to an element with header offset
    */
   const scrollto = (el) => {
-    let elementPos = select(el).offsetTop
+    let elementPos = documentTop(select(el))
     window.scrollTo({
       top: elementPos,
       behavior: 'smooth'
